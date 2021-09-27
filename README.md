@@ -23,12 +23,11 @@ ECSとALBでコンテナを用いたインフラ環境を構築
 ## clone
 ```bash
 git clone https://github.com/kotato-tohi/tf-sample-conteiner.git
-cd tf-sample-conteiner
-terraform init
 ```
 
 ## edit variables
-* terraform.tfvars
+* /environment/{dev|stg|prod}/terraform.tfvars
+
 
 # Note
  
