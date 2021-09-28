@@ -154,20 +154,10 @@ resource "aws_security_group_rule" "ecs_http" {
   from_port         = 80
   to_port           = 80
   protocol          = "tcp"
-  source_security_group_id = aws_security_group.sg_alb.id
-  security_group_id = aws_security_group.sg_alb.id
+  source_security_group_id = aws_security_group.sg_ecs.id
+  security_group_id = aws_security_group.sg_ecs.id
 }
 
-resource "aws_security_group_rule" "ecs_https" {
-  count = "${var.env_tag == "dev" ? 1 : 0}"
-  description       = "Allow http traffic from internet b/g_deploment main fraffic"
-  type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  source_security_group_id = aws_security_group.sg_alb.id
-  security_group_id = aws_security_group.sg_alb.id
-}
 
 ### -------------------------------------------#
 ### ECS stg environmetn rules

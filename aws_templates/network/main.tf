@@ -108,3 +108,5 @@ resource "aws_route_table_association" "rtb_pvt_assoc" {
   subnet_id = aws_subnet.pvt_sbn[count.index].id
   route_table_id = aws_route_table.rtb_pvt[count.index].id
 }
+
+
