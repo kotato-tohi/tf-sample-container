@@ -30,6 +30,15 @@ git clone https://github.com/kotato-tohi/tf-sample-conteiner.git
 
 
 # Note
- 
+## subnetについて
+* publicサブネットとprivateサブネットは同じ数にしかできません.
+* 作成されるazは1a,1b,1cの順番に作成されていきます.
+* サブネットの数を増やすときは/environment/{dev|stg|prod}/terraform.tfvarsのsbn_cntで変更します.
+* cidrは第3オクテットの0からインクリメントしていきます。先にpublicサブネットを割り当ててから、privateサブネットのcidrを割り振ります.
+
+## securiry groupについて
+* /aws_templates/securitu/mani.tfに各環境のルールを記載します。
+* 三項演算子とcountを使いvar.env_tagの値がdevかstgかprodかによってinboundルールを切り替える
+
 # Author 
 * kotato-tohi
