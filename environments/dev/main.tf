@@ -30,3 +30,13 @@ module "security" {
   vpc_id   = module.network.vpc_id
   myip     = var.myip
 }
+
+module "alb" {
+  source = "./../../aws_templates/alb"
+  tag_cost = var.tag_cost
+  tag_name = var.tag_name
+  pub_sbn = module.network.pub_sbn
+  sg_alb = module.security.sg_alb
+  vpc_id   = module.network.vpc_id
+  cert_arn = var.cert_arn
+} 
