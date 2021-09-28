@@ -1,3 +1,6 @@
+variable "env_tag" {
+  default = "dev"
+}
 variable "profile" {}
 variable "region" {
   default = "ap-northeast-1"
@@ -19,3 +22,4 @@ variable "cidr_block" {
 
 variable "enable_dns" {}
 variable "sbn_cnt" {}
+variable "myip" {}

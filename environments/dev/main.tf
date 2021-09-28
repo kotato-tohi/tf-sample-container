@@ -21,3 +21,12 @@ module "network" {
   tag_cost   = var.tag_cost
   enable_dns = true
 }
+
+module "security" {
+  source   = "./../../aws_templates/security"
+  env_tag  = var.env_tag
+  tag_name = var.tag_name
+  tag_cost = var.tag_cost
+  vpc_id   = module.network.vpc_id
+  myip     = var.myip
+}
