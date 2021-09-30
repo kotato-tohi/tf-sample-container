@@ -9,6 +9,7 @@ variable "ecs_host_mem"{
     default = 512
 }
 
+#  variable "ecs_role" {}
 variable "pvt_sbn" {}
 variable "alb_arn" {}
 variable "sg_ecs"{}

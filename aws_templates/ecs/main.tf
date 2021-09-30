@@ -40,6 +40,13 @@ TASK_DEFINITION
 resource "aws_ecs_service" "ecs_service" {
   name = "${var.tag_name}-service"
 
+  # https://github.com/hashicorp/terraform-provider-aws/issues/4657
+  # iam_role        = var.ecs_role.arn
+
+  deployment_controller {
+    type = "CODE_DEPLOY"
+  }
+
   # 当該ECSサービスを配置するECSクラスターの指定
   cluster = "${aws_ecs_cluster.ecs_cluster.name}"
 
