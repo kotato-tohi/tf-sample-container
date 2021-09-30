@@ -40,3 +40,14 @@ module "alb" {
   vpc_id   = module.network.vpc_id
   cert_arn = var.cert_arn
 } 
+
+
+module "ecs" {
+  source = "./../../aws_templates/ecs"
+  tag_cost = var.tag_cost
+  tag_name = var.tag_name
+  pvt_sbn = module.network.pvt_sbn
+  alb_arn = module.alb.alb_arn
+  alb_tgs = module.alb.alb_tgs
+  sg_ecs = module.security.sg_ecs
+}

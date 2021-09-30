@@ -18,6 +18,7 @@ resource "aws_lb" "alb" {
 resource "aws_lb_target_group" "alb_tg" {
   count = var.tg_cnt
   name     = "${var.tag_name}-tg${1+count.index}"
+	target_type = "ip"
   port     = 80
   protocol = "HTTP"
   vpc_id   = var.vpc_id
