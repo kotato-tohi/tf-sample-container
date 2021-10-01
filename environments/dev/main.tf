@@ -31,12 +31,32 @@ module "security" {
   myip     = var.myip
 }
 
+module "iam" {
+  source   = "./../../aws_templates/iam"
+  tag_name = var.tag_name
+  tag_cost = var.tag_cost
+}
+
 module "alb" {
-  source = "./../../aws_templates/alb"
+  source   = "./../../aws_templates/alb"
   tag_cost = var.tag_cost
   tag_name = var.tag_name
-  pub_sbn = module.network.pub_sbn
-  sg_alb = module.security.sg_alb
+  pub_sbn  = module.network.pub_sbn
+  sg_alb   = module.security.sg_alb
   vpc_id   = module.network.vpc_id
   cert_arn = var.cert_arn
-} 
+}
+
+
+module "ecs" {
+  source        = "./../../aws_templates/ecs"
+  tag_cost      = var.tag_cost
+  tag_name      = var.tag_name
+  pvt_sbn       = module.network.pvt_sbn
+  alb           = module.alb.alb
+  alb_tgs       = module.alb.alb_tgs
+  alb_listeners = module.alb.alb_listeners
+  sg_ecs        = module.security.sg_ecs
+  # ecs_role = module.iam.ecs_role
+  deploy_role = module.iam.deploy_role
+}

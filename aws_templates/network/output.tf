@@ -6,3 +6,6 @@ output "pub_sbn" {
   value = aws_subnet.pub_sbn
 }
 
+output "pvt_sbn" {
+  value = aws_subnet.pvt_sbn
+}

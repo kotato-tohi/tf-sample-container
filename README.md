@@ -82,17 +82,18 @@ terrapform apply
 # Note
 ## subnetについて
 * publicサブネットの数は必ず2以上にしてください。albの作成でエラーになります。
-* publicサブネットとprivateサブネットは同じ数にしかできません.
-* 作成されるazは1a,1b,1cの順番に作成されていきます.
+* publicサブネットとprivateサブネットは同じ数にしかできません。
+* 作成されるazは1a,1b,1cの順番に作成されていきます。
 * サブネットの数を増やすときは/environment/{dev|stg|prod}/terraform.tfvarsのsbn_cntで変更します.
-* cidrは第3オクテットの0からインクリメントしていきます。先にpublicサブネットを割り当ててから、privateサブネットのcidrを割り振ります.
+* cidrは第3オクテットの0からインクリメントしていきます。先にpublicサブネットを割り当ててから、privateサブネットのcidrを割り振ります。
 
 ## securiry groupについて
 * /aws_templates/securitu/mani.tfに各環境のルールを記載します。
-* 三項演算子とcountを使いvar.env_tagの値がdevかstgかprodかによってinboundルールを切り替える
+* 三項演算子とcountを使いvar.env_tagの値がdevかstgかprodかによってinboundルールを切り替ます。
 
 ## target groupについて
 * ALBのターゲットグループはBlue/Greenデプロイメント用に2つ作成します。
+* ターゲットグループの作成数を変更するとCodeDeployの設定でエラーになります。
 
 # Author 
 * kotato-tohi

@@ -121,7 +121,20 @@ resource "aws_security_group" "sg_ecs" {
   name        = "sg_ecs"
   description = "Allow inbound traffic alb"
   vpc_id      = var.vpc_id
+  ingress = [
+    {
+      description      = "Allow inbound traffic alb "
+      from_port        = 80
+      to_port          = 80
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+      prefix_list_ids  = []
+      security_groups  = [aws_security_group.sg_alb.id]
+      self             = true
+    }
 
+  ]
   egress = [
     {
       description      = "outbound allow rule"
@@ -147,16 +160,16 @@ resource "aws_security_group" "sg_ecs" {
 ### ECS dev environmetn rules
 ### -------------------------------------------#
 
-resource "aws_security_group_rule" "ecs_http" {
-  count = "${var.env_tag == "dev" ? 1 : 0}"
-  description       = "Allow http traffic from internet b/g_deploment main fraffic"
-  type              = "ingress"
-  from_port         = 80
-  to_port           = 80
-  protocol          = "tcp"
-  source_security_group_id = aws_security_group.sg_ecs.id
-  security_group_id = aws_security_group.sg_ecs.id
-}
+# resource "aws_security_group_rule" "ecs_http" {
+#   count = "${var.env_tag == "dev" ? 1 : 0}"
+#   description       = "Allow http traffic from internet b/g_deploment main fraffic"
+#   type              = "ingress"
+#   from_port         = 80
+#   to_port           = 80
+#   protocol          = "tcp"
+#   source_security_group_id = aws_security_group.sg_alb.id
+#   security_group_id = aws_security_group.sg_ecs.id
+# }
 
 
 ### -------------------------------------------#
