@@ -68,7 +68,6 @@ ECSとALBでコンテナを用いたBlueGreenデプロイ可能なインフラ�
 ```
  
 # Usage
-## clone
 ```bash
 git clone https://github.com/kotato-tohi/tf-sample-conteiner.git
 cd tf-sample-container
