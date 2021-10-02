@@ -18,6 +18,7 @@ ECSとALBでコンテナを用いたBlueGreenデプロイ可能なインフラ�
 # Tree
  
 ```zsh
+$ tree .
 .
 ├── README.md
 ├── aws_templates
@@ -30,6 +31,10 @@ ECSとALBでコンテナを用いたBlueGreenデプロイ可能なインフラ�
 │   │   ├── main.tf
 │   │   ├── output.tf
 │   │   ├── provider.tf
+│   │   └── variables.tf
+│   ├── iam
+│   │   ├── main.tf
+│   │   ├── output.tf
 │   │   └── variables.tf
 │   ├── network
 │   │   ├── main.tf
@@ -61,21 +66,26 @@ ECSとALBでコンテナを用いたBlueGreenデプロイ可能なインフラ�
         ├── main.tf
         ├── output.tf
         ├── provider.tf
+        ├── terraform.tfstate
+        ├── terraform.tfstate.backup
         ├── terraform.tfvars
         └── variables.tf
 
-9 directories, 35 files
+10 directories, 40 files
 ```
  
 # Usage
-## clone
+## Create Resources
 ```bash
 git clone https://github.com/kotato-tohi/tf-sample-conteiner.git
-cd tf-sample-container
+cd tf-sample-container/environment/{dev|stg|prof}
 terraform init
 terraform plan
 terrapform apply
 ```
+
+## Execute BlueGreen Deployment
+URL
 
 ## edit variables
 * /environment/{dev|stg|prod}/terraform.tfvars
@@ -99,5 +109,6 @@ terrapform apply
 
 ## IAMロールについて
 * 環境差異の吸収が不十分で、各環境ごとに別名のロールが作成されます。
+
 # Author 
 * kotato-tohi
