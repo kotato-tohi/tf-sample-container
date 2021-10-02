@@ -23,3 +23,4 @@ variable "cidr_block" {
 variable "enable_dns" {}
 variable "sbn_cnt" {}
 variable "myip" {}
+variable "cert_arn" {}
