@@ -34,7 +34,7 @@ resource "aws_security_group" "sg_alb" {
 ### -------------------------------------------#
 
 resource "aws_security_group_rule" "alb_http_main" {
-	count = "${var.env_tag == "dev" ? 1 : 0}"
+  count             = var.env_tag == "dev" ? 1 : 0
   description       = "Allow http traffic from internet b/g_deploment main fraffic"
   type              = "ingress"
   from_port         = 80
@@ -45,7 +45,7 @@ resource "aws_security_group_rule" "alb_http_main" {
 }
 
 resource "aws_security_group_rule" "alb_https_main" {
-  count = "${var.env_tag == "dev" ? 1 : 0}"
+  count             = var.env_tag == "dev" ? 1 : 0
   description       = "Allow https traffic from internet b/g_deployment main traffic"
   type              = "ingress"
   from_port         = 443
@@ -56,7 +56,7 @@ resource "aws_security_group_rule" "alb_https_main" {
 }
 
 resource "aws_security_group_rule" "alb_http_test" {
-  count = "${var.env_tag == "dev" ? 1 : 0}"
+  count             = var.env_tag == "dev" ? 1 : 0
   description       = "Allow http traffic from internet b/g_deploment test fraffic"
   type              = "ingress"
   from_port         = 8080
@@ -67,7 +67,7 @@ resource "aws_security_group_rule" "alb_http_test" {
 }
 
 resource "aws_security_group_rule" "alb_https_test" {
-  count = "${var.env_tag == "dev" ? 1 : 0}"
+  count             = var.env_tag == "dev" ? 1 : 0
   description       = "Allow https traffic from internet b/g_deployment test traffic"
   type              = "ingress"
   from_port         = 4430
@@ -94,13 +94,13 @@ resource "aws_security_group_rule" "alb_https_test" {
 # }
 
 resource "aws_security_group_rule" "stg_alb_https_main" {
-	count = "${var.env_tag == "stg" ? 1 : 0}" 
+  count             = var.env_tag == "stg" ? 1 : 0
   description       = "Allow http traffic from internet b/g_deploment main fraffic"
   type              = "ingress"
   from_port         = 443
   to_port           = 443
   protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"] 
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.sg_alb.id
 }
 
@@ -117,7 +117,7 @@ resource "aws_security_group_rule" "stg_alb_https_main" {
 # }
 
 resource "aws_security_group_rule" "stg_alb_https_test" {
-  count = "${var.env_tag == "st" ? 1 : 0}"
+  count             = var.env_tag == "st" ? 1 : 0
   description       = "Allow https traffic from internet b/g_deployment test traffic"
   type              = "ingress"
   from_port         = 4430

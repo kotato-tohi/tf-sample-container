@@ -16,22 +16,23 @@ resource "aws_lb" "alb" {
 
 
 resource "aws_lb_target_group" "alb_tg" {
-  count = 2 #no change!
-  name     = "${var.tag_name}-tg${1+count.index}"
-	target_type = "ip"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = var.vpc_id
+  count       = 2 #no change!
+  name        = "${var.tag_name}-tg${1 + count.index}"
+  target_type = "ip"
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = var.vpc_id
 }
 
 
 resource "aws_lb_listener" "alb_listener" {
-	count = var.tg_cnt
+  count             = var.tg_cnt
   load_balancer_arn = aws_lb.alb.arn
   port              = var.listrn_port_list[count.index]
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = var.cert_arn
+  protocol          = "HTTP"
+  # protocol          = "HTTPS"
+  # ssl_policy        = "ELBSecurityPolicy-2016-08"
+  # certificate_arn   = var.cert_arn
 
   default_action {
     type             = "forward"
