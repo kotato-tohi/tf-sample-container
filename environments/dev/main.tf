@@ -45,7 +45,7 @@ module "alb" {
   pub_sbn  = module.network.pub_sbn
   sg_alb   = module.security.sg_alb
   vpc_id   = module.network.vpc_id
-  cert_arn = var.cert_arn
+  # cert_arn = var.cert_arn
 }
 
 
