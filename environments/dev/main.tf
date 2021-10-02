@@ -35,6 +35,7 @@ module "iam" {
   source   = "./../../aws_templates/iam"
   tag_name = var.tag_name
   tag_cost = var.tag_cost
+  env_tag  = var.env_tag
 }
 
 module "alb" {

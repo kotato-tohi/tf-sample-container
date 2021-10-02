@@ -4,7 +4,7 @@
 
 resource "aws_security_group" "sg_alb" {
 
-  name        = "sg_alb"
+  name        = "${var.env_tag}_sg_alb"
   description = "Allow inbound traffic alb"
   vpc_id      = var.vpc_id
 
@@ -82,9 +82,8 @@ resource "aws_security_group_rule" "alb_https_test" {
 ### ALB stg environmetn rules
 ### -------------------------------------------#
 
-# sample 
-# resource "aws_security_group_rule" "alb_http_main" {
-# 	count = "${var.env_tag == "stf" ? 1 : 0}"   <===**** if var.env_tag = "stg" then create this resouece
+# resource "aws_security_group_rule" "stg_alb_http_main" {
+# 	count = "${var.env_tag == "stg" ? 1 : 0}" 
 #   description       = "Allow http traffic from internet b/g_deploment main fraffic"
 #   type              = "ingress"
 #   from_port         = 80
@@ -93,6 +92,40 @@ resource "aws_security_group_rule" "alb_https_test" {
 #   cidr_blocks       = ["0.0.0.0/0"] 
 #   security_group_id = aws_security_group.sg_alb.id
 # }
+
+resource "aws_security_group_rule" "stg_alb_https_main" {
+	count = "${var.env_tag == "stg" ? 1 : 0}" 
+  description       = "Allow http traffic from internet b/g_deploment main fraffic"
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"] 
+  security_group_id = aws_security_group.sg_alb.id
+}
+
+
+# resource "aws_security_group_rule" "stg_alb_http_test" {
+#   count = "${var.env_tag == "stg" ? 1 : 0}"
+#   description       = "Allow http traffic from internet b/g_deploment test fraffic"
+#   type              = "ingress"
+#   from_port         = 8080
+#   to_port           = 8080
+#   protocol          = "tcp"
+#   cidr_blocks       = ["${var.myip}"]
+#   security_group_id = aws_security_group.sg_alb.id
+# }
+
+resource "aws_security_group_rule" "stg_alb_https_test" {
+  count = "${var.env_tag == "st" ? 1 : 0}"
+  description       = "Allow https traffic from internet b/g_deployment test traffic"
+  type              = "ingress"
+  from_port         = 4430
+  to_port           = 4430
+  protocol          = "tcp"
+  cidr_blocks       = ["${var.myip}"]
+  security_group_id = aws_security_group.sg_alb.id
+}
 
 
 ### -------------------------------------------#

@@ -1,5 +1,5 @@
 # tf-sample-container 
-ECSとALBでコンテナを用いたインフラ環境を構築
+ECSとALBでコンテナを用いたBlueGreenデプロイ可能なインフラ環境を構築
 
 # DEMO
 ![container_service](https://user-images.githubusercontent.com/68144034/134936906-5849814b-8e16-4b87-ab59-c2f215282fd9.png)
@@ -7,7 +7,9 @@ ECSとALBでコンテナを用いたインフラ環境を構築
 
 # Features
 各種リソースをmoduleとしてテンプレート化して
-各環境用のmain.tfから呼び出すことで複数環境の構築を行う。
+各環境用ディレクトリのmain.tfから呼び出す。
+
+
 
 # Requirement 
 * Terraform  v1.0.6
@@ -95,5 +97,7 @@ terrapform apply
 * ALBのターゲットグループはBlue/Greenデプロイメント用に2つ作成します。
 * ターゲットグループの作成数を変更するとCodeDeployの設定でエラーになります。
 
+## IAMロールについて
+* 環境差異の吸収が不十分で、各環境ごとに別名のロールが作成されます。
 # Author 
 * kotato-tohi

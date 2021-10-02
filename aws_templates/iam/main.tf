@@ -1,5 +1,5 @@
 resource "aws_iam_role" "deploy_role" {
-  name = "deploy_for_ecs"
+  name = "${var.env_tag}_deploy_for_ecs"
 
   assume_role_policy = <<EOF
 {
@@ -16,6 +16,10 @@ resource "aws_iam_role" "deploy_role" {
   ]
 }
 EOF
+  tags = {
+    Name = var.tag_name
+    Cost = var.tag_cost
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "AWSCodeDeployRole" {
@@ -46,10 +50,7 @@ resource "aws_iam_role_policy_attachment" "AWSCodeDeployRole" {
 
 
 
-#   tags = {
-#     Name = var.tag_name
-#     Cost = var.tag_cost
-#   }
+
 # }
 
 # resource "aws_iam_role_policy_attachment" "test-attach" {

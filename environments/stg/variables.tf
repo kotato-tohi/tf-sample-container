@@ -1,5 +1,5 @@
 variable "env_tag" {
-  default = "dev"
+  default = "stg"
 }
 variable "profile" {}
 variable "region" {
