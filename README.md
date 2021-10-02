@@ -18,6 +18,7 @@ ECSとALBでコンテナを用いたBlueGreenデプロイ可能なインフラ�
 # Tree
  
 ```zsh
+$ tree .
 .
 ├── README.md
 ├── aws_templates
@@ -30,6 +31,10 @@ ECSとALBでコンテナを用いたBlueGreenデプロイ可能なインフラ�
 │   │   ├── main.tf
 │   │   ├── output.tf
 │   │   ├── provider.tf
+│   │   └── variables.tf
+│   ├── iam
+│   │   ├── main.tf
+│   │   ├── output.tf
 │   │   └── variables.tf
 │   ├── network
 │   │   ├── main.tf
@@ -61,8 +66,12 @@ ECSとALBでコンテナを用いたBlueGreenデプロイ可能なインフラ�
         ├── main.tf
         ├── output.tf
         ├── provider.tf
+        ├── terraform.tfstate
+        ├── terraform.tfstate.backup
         ├── terraform.tfvars
         └── variables.tf
+
+10 directories, 40 files
 
 9 directories, 35 files
 ```
